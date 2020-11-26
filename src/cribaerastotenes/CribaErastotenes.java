@@ -10,7 +10,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.Scanner;
+
 
 public class CribaErastotenes {
 
@@ -24,12 +25,8 @@ public class CribaErastotenes {
     public CribaErastotenes (int numero){
         this.numero = numero;
     }
-
-    @Override
-    public String toString() {
-        return "Primo{" + "primo=" + numero + '}';
-    }
-    
+ 
+   
     /*Este método comproba que si o número introducido é primo ou non.
     No caso de selo, o retorna tal cual o seu valor. 
     Si non é primo (desbotando os múltiplos de 1, e os que divididos polos números
@@ -71,6 +68,7 @@ public class CribaErastotenes {
             taboa.add(1);
         }
     }
+
     
     /* No caso de que o método que calcula si o número é primo non devolve un 0,
     e o array non contén xa ese número, o almacena.
@@ -105,9 +103,33 @@ public class CribaErastotenes {
         return numero;
     }
     
+    /*Para calcular qué valor ocupa unha determidada posición, introduzo como
+    parámetro dita posición e co método get() de ArrayList me devolve o valor de 
+    dita posición. Tendo en conta que o array comeza a contar co 0, debo restar 
+    un valor ó número solicitado para que empece a contar no 1, non no 0.
+    */
+    public Integer posicion (int numero){
+        int posicion = numero --;
+        int sizeArray = taboa.size();
+        if (posicion <= sizeArray){
+        int valor = 0;
+        valor = taboa.get(numero);
+        System.out.println("El primo número " + posicion + " es el " + valor + ".");
+        }
+        return numero;
+    }
+    
+    
     public static void main(String[] args) {
+        Scanner teclado = new Scanner (System.in);
         CribaErastotenes ce = new CribaErastotenes ();
         ce.addPrimo(ce.isPrimo(ce.createTable(1000)));
+        //ce.saveTable();
+        ce.readTable();
+        System.out.println("Indica la posición de la que desea conocer el valor ");
+        int numero = teclado.nextInt();
+        ce.posicion(numero);
+        //System.out.println(ce.taboa.size());
     }
     
 }
