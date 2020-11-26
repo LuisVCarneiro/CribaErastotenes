@@ -89,7 +89,7 @@ public class CribaErastotenes {
     /*Aquí creo a táboa de Erastótenes, indicando como parámetro o número maior
     que quero calcular, hasta qué número. 
     */
-    public Integer createTable(int numero){
+    /*public Integer createTable(int numero){
         int contador = 1;
         while (numero >= contador){
             addPrimo(isPrimo(contador));
@@ -97,6 +97,19 @@ public class CribaErastotenes {
         }
         //System.out.println(taboa);
         return numero;
+    }*/
+    
+    public void createTable(int tope){
+        tope--;
+        int tamañoTaboa = (taboa.size());
+        int contador = 2;
+        while (tamañoTaboa <= tope){
+            addPrimo(isPrimo(contador));
+            tamañoTaboa = taboa.size();
+            contador++;
+        }
+        System.out.println(tamañoTaboa);
+        
     }
     
     /*Para calcular qué valor ocupa unha determidada posición, introduzo como
@@ -107,8 +120,7 @@ public class CribaErastotenes {
     public Integer getPosicion (int numero){
         int sizeArray = taboa.size();
         if (numero <= sizeArray){
-        int valor = 0;
-        valor = taboa.get(numero);
+        int valor = (taboa.get(numero - 1));
         System.out.println("El primo número " + numero + " es el " + valor + ".");
         }
         return numero;
@@ -117,8 +129,9 @@ public class CribaErastotenes {
     public static void main(String[] args) {
         Scanner teclado = new Scanner (System.in);
         CribaErastotenes ce = new CribaErastotenes ();
-        ce.addPrimo(ce.isPrimo(ce.createTable(1000)));
         ce.readTable();
+        ce.createTable(5);
+        System.out.println(ce.taboa);
         System.out.println("Indica la posición de la que desea conocer el valor ");
         int numero = teclado.nextInt();
         ce.getPosicion(numero);
