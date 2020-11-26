@@ -50,8 +50,7 @@ public class CribaErastotenes {
     }
     
     /*Este método le o arquivo serializado donde está a táboa de primos, e a 
-    almacena nun array para que a app a recorra. No caso de que a táboa esté vacía,
-    introduzo os 3 primeiros números primos xa que é máis sinxelo de facelo así.
+    almacena nun array para que a app a recorra. 
     */
     public void readTable (){
         try 
@@ -63,9 +62,6 @@ public class CribaErastotenes {
             System.out.println(cnfe.getMessage());
         }catch (IOException ioe){
             System.out.println(ioe.getMessage());   
-        }
-        if (taboa.isEmpty()){
-            taboa.add(1);
         }
     }
 
@@ -99,7 +95,7 @@ public class CribaErastotenes {
             addPrimo(isPrimo(contador));
             contador ++;
         }
-        System.out.println(taboa);
+        //System.out.println(taboa);
         return numero;
     }
     
@@ -108,28 +104,24 @@ public class CribaErastotenes {
     dita posición. Tendo en conta que o array comeza a contar co 0, debo restar 
     un valor ó número solicitado para que empece a contar no 1, non no 0.
     */
-    public Integer posicion (int numero){
-        int posicion = numero --;
+    public Integer getPosicion (int numero){
         int sizeArray = taboa.size();
-        if (posicion <= sizeArray){
+        if (numero <= sizeArray){
         int valor = 0;
         valor = taboa.get(numero);
-        System.out.println("El primo número " + posicion + " es el " + valor + ".");
+        System.out.println("El primo número " + numero + " es el " + valor + ".");
         }
         return numero;
     }
-    
     
     public static void main(String[] args) {
         Scanner teclado = new Scanner (System.in);
         CribaErastotenes ce = new CribaErastotenes ();
         ce.addPrimo(ce.isPrimo(ce.createTable(1000)));
-        //ce.saveTable();
         ce.readTable();
         System.out.println("Indica la posición de la que desea conocer el valor ");
         int numero = teclado.nextInt();
-        ce.posicion(numero);
-        //System.out.println(ce.taboa.size());
+        ce.getPosicion(numero);
     }
     
 }
